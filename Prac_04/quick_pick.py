@@ -1,47 +1,23 @@
 import random
-
-
-def Check(array):
-    flag = True
-    while flag:
-        flag = False
-
-        for i in range(len(array) - 1):
-            try:
-                num = array[i + 1]
-            except IndexError:
-                break
-
-            if array[i] == num:
-                array.pop(i + 1)
-                flag = True
-
-    return len(array)
-
+in_line = 6
+minimum = 1
+maximum = 45
 
 def main():
-    Number = int(input('How many "quick picks" you want: '))
-    Raw = []
-    CONSTANTS = []
-    for i in range(Number):
-
-        for j in range(6):
-            Raw.append(random.randint(1, 45))
-            Raw.sort()
-        while Check(Raw) < 6:
-            Raw.append(random.randint(1, 45))
-            Raw.sort()
-
-        CONSTANTS.append(Raw)
-        Raw = []
-
-    for lines in CONSTANTS:
-        for col in range(6):
-            print('{}'.format(lines[col]), end=' ')
-        print()
-
-
-if __name__ == '__main__':
-    main()
+    quickpicks = int(input("Enter numbers to roll: "))
+    while quickpicks < 0:
+        print("Invalid number")
+        quickpicks = int(input("Enter numbers to roll: "))
+    for i in range(quickpicks):
+        picks = []
+        for j in range(in_line):
+            numbers = random.randint(minimum,maximum)
+            while numbers in picks:
+                #This While loop works when same number appear in same line
+                numbers = random.randint(minimum,maximum)
+            picks.append(numbers)
+        picks.sort()
+        print(picks)
+main()
 
 
